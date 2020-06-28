@@ -1,12 +1,14 @@
 @mixin web-node {
     align-items: center;
     background-color: $tertiary-color;
-    border: 0.25rem solid $quaternary-color;
+    border: 0.5rem solid $quaternary-color;
     border-radius: 50%;
     color: $primary-color;
+    cursor: pointer;
     display: flex;
     height: 10rem;
     text-align: center;
+    text-decoration: none;
     width: 10rem;
 }
 

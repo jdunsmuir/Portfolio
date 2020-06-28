@@ -17,11 +17,21 @@
 .home__web__column {
     @include web-node-column;
     justify-content: space-evenly;
-
+    opacity: 0%;
+    transition: all 1s ease-in-out;
 }
 
 .home__web__column--centre {
     justify-content: center;
+    opacity: 100%;
+}
+
+.home__web__column--hidden {
+    visibility: hidden;
+}
+
+.home__web__column--shown {
+    opacity: 100%;
 }
 
 .home__web__node-body {
@@ -34,16 +44,31 @@
 }
 
 .home__web__node-text {
+    font-size: 5rem;
     width: 100%;
 }
 
-#home__web__node-text--profile {}
+.home__web__node-text--centre {
+    font-size: 1.75rem;
+}
 
 .home__web__node-container {
     align-items: center;
     display: flex;
     flex-direction: column;
     width: 100%;
+}
+
+.home__web__node-container--invisible {
+    // opacity: 0%;
+}
+
+.home__web__node-container--hidden {
+    // display: none;
+}
+
+.home__web__node-description {
+    text-align: center;
 }
 
 .home__web__node__connector-svg {

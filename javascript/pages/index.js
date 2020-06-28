@@ -1,17 +1,3 @@
-let setWebNodeLines = () => {
-    let centreNodeContainerElement = document.getElementById('home__web__node-container--centre');
-    let centreNodeContainer = new CentreNodeContainer(centreNodeContainerElement);
-
-    let nodeContainers = document.getElementsByClassName('home__web__node-container--child');
-    let numberOfContainers = nodeContainers.length;
-    for (let i = 0; i < numberOfContainers; i++) {
-        new ChildNodeContainer(nodeContainers[i], centreNodeContainer);
-    }
-}
-
-window.addEventListener('load', setWebNodeLines);
-window.addEventListener('resize', setWebNodeLines);
-
 class NodeContainer {
     constructor(element) {
         this.element = element;
@@ -22,7 +8,11 @@ class NodeContainer {
         this.yCoordinate = this.getYCentre(this.top, this.bottom)
     }
     setPositionAttributes(element) {
-        let positions = element.getClientRects();
+        let node = element.getElementsByClassName('home__web__node-body');
+        if (node.length != 1) {
+            return false; // TODO: Change the outcome if this is thrown
+        }
+        let positions = node[0].getClientRects();
         if (positions.length != 1) {
             return false;
         }
@@ -43,6 +33,7 @@ class NodeContainer {
     getYCentre(top, bottom) {
         return (top + bottom) / 2;
     }
+
 }
 
 class CentreNodeContainer extends NodeContainer {
@@ -81,9 +72,43 @@ class Line {
     setLinePositions(childNodeX, centreNodeX, childNodeY, centreNodeY) {
         this.element.attributes.x1.value = childNodeX;
         this.element.attributes.y1.value = childNodeY;
-
-
         this.element.attributes.x2.value = centreNodeX;
         this.element.attributes.y2.value = centreNodeY;
     }
 }
+
+let setWebNodeLines = () => {
+    let centreNodeContainerElement = document.getElementById('home__web__node-container--centre');
+    let centreNodeContainer = new CentreNodeContainer(centreNodeContainerElement);
+
+    let nodeContainers = document.getElementsByClassName('home__web__node-container--child');
+    let numberOfContainers = nodeContainers.length;
+    this.childNodeContainers = [];
+    for (let i = 0; i < numberOfContainers; i++) {
+        this.childNodeContainers.push(new ChildNodeContainer(nodeContainers[i], centreNodeContainer));
+    }
+
+    let columnMenu = document.getElementById('home__web__column--menu');
+}
+
+let centralButtonClicked = () => {
+    let columnMenu = document.getElementById('home__web__column--menu');
+    if (columnMenu.classList.contains('home__web__column--hidden')) {
+        columnMenu.classList.remove('home__web__column--hidden');
+        columnMenu.classList.add('home__web__column--shown');
+    } else {
+        columnMenu.classList.add('home__web__column--hidden');
+        columnMenu.classList.remove('home__web__column--shown');
+    }
+}
+
+let onLoad = () => {
+    let centralButton = document.getElementById('home__web__node-body--centre');
+
+    setWebNodeLines();
+    window.addEventListener('resize', setWebNodeLines);
+    centralButton.addEventListener('click', centralButtonClicked)
+}
+
+
+window.addEventListener('load', onLoad);
