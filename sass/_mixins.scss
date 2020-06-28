@@ -1,0 +1,22 @@
+@mixin web-node {
+    align-items: center;
+    background-color: $tertiary-color;
+    border: 0.25rem solid $quaternary-color;
+    border-radius: 50%;
+    color: $primary-color;
+    display: flex;
+    height: 10rem;
+    text-align: center;
+    width: 10rem;
+}
+
+@mixin web-node-column {
+    align-items: center;
+    display: flex;
+    flex-basis: 30%;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-shrink: 0;
+    min-height: 100vh;
+    padding: 0rem 1rem;
+}

@@ -1,0 +1,9 @@
+// node-sass sass/site.scss css/site.css
+@import "scss/fontawesome.scss";
+@import "scss/solid.scss";
+
+@import "variables.scss";
+@import "common.scss";
+@import "_mixins.scss";
+
+@import "pages/index.scss";
